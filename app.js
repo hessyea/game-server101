@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-process.env['NODE_ENV'] = 'production';
 app.set('port', process.env.PORT || 3000);
 
 var forceSsl = function (req, res, next) {
@@ -27,11 +26,11 @@ app.configure(function(){
 
 
 app.configure('production', function(){
+	app.use(forceSsl);
 	var oneYear = 31557600000;
 	app.use(express.static(__dirname + '/public', { maxAge: oneYear }));
 	app.use(express.errorHandler());
 });
-app.enable('trust proxy');
 
 console.log("Web server has started.\nPlease log on http://127.0.0.1:3002/index.html");
 app.listen(app.get('port'));
