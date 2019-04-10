@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
+const https = require('https');
 app.set('port', process.env.PORT || 3000);
+
 app.configure(function(){
 	app.use(express.methodOverride());
 	app.use(express.bodyParser());
@@ -15,6 +17,15 @@ app.configure('development', function(){
 	app.use(express.static(__dirname + '/public'));
 	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
+
+app.use(function (req, res, next) {
+  if (req.headers['x-forwarded-proto'] !== 'https' && process.env.NODE_ENV === 'production') {
+    const secureUrl = 'https://' + req.hostname + req.originalUrl
+    res.redirect(302, secureUrl)
+  }
+  next()
+})
+
 
 app.configure('production', function(){
 	var oneYear = 31557600000;
