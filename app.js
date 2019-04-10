@@ -13,24 +13,21 @@ app.configure(function(){
 	app.set('basepath',__dirname + '/public');
 });
 
-app.configure('development', function(){
-	app.use(express.static(__dirname + '/public'));
-	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
 
-app.use(function (req, res, next) {
-  if (req.headers['x-forwarded-proto'] !== 'https' && process.env.NODE_ENV === 'production') {
-    const secureUrl = 'https://' + req.hostname + req.originalUrl
-    res.redirect(302, secureUrl)
-  }
-  next()
-})
+
+
 
 
 app.configure('production', function(){
 	var oneYear = 31557600000;
 	app.use(express.static(__dirname + '/public', { maxAge: oneYear }));
 	app.use(express.errorHandler());
+	app.use(function (req, res, next) {
+    const secureUrl = 'https://' + req.hostname + req.originalUrl
+    res.redirect(302, secureUrl)
+
+  next()
+});
 });
 
 console.log("Web server has started.\nPlease log on http://127.0.0.1:3002/index.html");
