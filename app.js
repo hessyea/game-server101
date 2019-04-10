@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-
+process.env['NODE_ENV'] = 'production';
 app.set('port', process.env.PORT || 3000);
 
 var forceSsl = function (req, res, next) {
