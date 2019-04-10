@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-
+app.set('port', process.env.PORT || 3000);
 app.configure(function(){
 	app.use(express.methodOverride());
 	app.use(express.bodyParser());
@@ -23,4 +23,4 @@ app.configure('production', function(){
 });
 
 console.log("Web server has started.\nPlease log on http://127.0.0.1:3002/index.html");
-app.listen(3002);
+app.listen(app.get('port'));
