@@ -167,7 +167,7 @@
       }
     }
 
-    return (protocol || 'https') + '://' + host + ':' + (port || 80);
+    return (protocol || 'http') + '://' + host + ':' + (port || 80);
   };
 
   /**
@@ -1595,7 +1595,7 @@
     };
 
     var url = [
-          'https' + (options.secure ? 's' : '') + ':/'
+          'http' + (options.secure ? 's' : '') + ':/'
         , options.host + ':' + options.port
         , options.resource
         , io.protocol
@@ -2544,7 +2544,7 @@
       var options = socket.options
         , port = options['flash policy port']
         , path = [
-              'https' + (options.secure ? 's' : '') + ':/'
+              'http' + (options.secure ? 's' : '') + ':/'
             , options.host + ':' + options.port
             , options.resource
             , 'static/flashsocket'
@@ -3172,7 +3172,7 @@ var swfobject=function(){var D="undefined",r="object",S="Shockwave Flash",W="Sho
     try {
       var request = io.util.request(xdomain),
           usesXDomReq = (global.XDomainRequest && request instanceof XDomainRequest),
-          socketProtocol = (socket && socket.options && socket.options.secure ? 'https:' : 'https:'),
+          socketProtocol = (socket && socket.options && socket.options.secure ? 'https:' : 'http:'),
           isXProtocol = (socketProtocol != global.location.protocol);
       if (request && !(usesXDomReq && isXProtocol)) {
         return true;
