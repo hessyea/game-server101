@@ -168,7 +168,7 @@ function GameClient(){
 GameClient.prototype.getEntry = function(cb){
     var me = this;
     pomelo.init({
-        host : window.location.hostname,
+        host : 'https://ioipk.herokuapp.com',
         port : 3014,
         log  : true
     }, function(){
