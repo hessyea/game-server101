@@ -332,7 +332,6 @@ var bt2Str = function(byteArray,start,end) {
     if(port) {
       url +=  ':' + port;
     }
-    io.set('match origin protocol', true);
     socket = io.connect(url, {'force new connection': true, reconnect: false,secure: true });
 
     socket.on('connect', function(){
